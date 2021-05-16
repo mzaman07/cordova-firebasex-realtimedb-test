@@ -7,6 +7,12 @@ const removeListener = document.getElementById('cleanListener');
 const dataDump = document.getElementById('showData');
 const setAtValue = document.getElementById('setValue');
 const removeAtValue = document.getElementById('removeAt');
+const loadDataOnce = document.getElementById('loadDataOnce');
+const updateAt = document.getElementById('updateAt');
+const goOnline = document.getElementById('goOnline');
+const goOffline = document.getElementById('goOffline');
+const persistOn = document.getElementById('onPersist');
+const persistOff = document.getElementById('offPersist');
 
 
 
@@ -27,6 +33,18 @@ signOut.addEventListener('click', (ev)=> {
     }, (err)=> {
         console.log('err', err);
     });
+});
+
+loadDataOnce.addEventListener('click', (e)=> {
+    // test defined endpoint from database
+    const urlPath = 'posts';
+    // test null endpoint from database
+    // const urlPath = 'play/pop';
+    FirebasePlugin.fetchFromRealtimeDatabaseOnce(urlPath, (data)=> {
+        console.log('data fetched once', data);
+    }, (err) => {
+        console.log('err', err);
+    })
 });
 
 loadDataWithListener.addEventListener('click', (e) => {
@@ -91,3 +109,51 @@ removeAtValue.addEventListener('click', (ev)=> {
         console.log('test', err);
     });
 });
+
+updateAt.addEventListener('click', (e)=> {
+    const objectForUpdate = {
+        name:'king',
+        occupation:'freeflow',
+        specialisation:'air'
+    }
+    const path = 'clientB/org/kingOfAir';
+
+    FirebasePlugin.updateChildrenInRealtimeDatabase(path, objectForUpdate, (updated)=> {
+        console.log('updatedObject', updated);
+    }, (err) => {
+        console.log('test', err);
+    });
+});
+
+goOnline.addEventListener('click', (e)=> {
+    FirebasePlugin.realtimeDatabaseOnline(()=> {
+        console.log('online');
+    },(err) => {
+        console.log('test', err);
+    });
+});
+
+goOffline.addEventListener('click', (e)=> {
+    FirebasePlugin.realtimeDatabaseOffline(()=> {
+        console.log('offline');
+    },(err) => {
+        console.log('test', err);
+    });
+});
+
+persistOn.addEventListener('click', (e) => {
+    FirebasePlugin.setRealtimeDatabasePersistence(true, ()=> {
+        console.log('persistence Enabled for database');
+    },(err) => {
+        console.log('test', err);
+    });
+});
+
+persistOff.addEventListener('click', (e)=> {
+    FirebasePlugin.setRealtimeDatabasePersistence(false, ()=> {
+        console.log('persistence Enabled for database');
+    },(err) => {
+        console.log('test', err);
+    });
+});
+

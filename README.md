@@ -3,7 +3,7 @@ A demo/test repo for adding realtime database functionality to the firebasex cor
 
 # Purpose
 
-This project is created for demonstration and testing purposes. It is only intended to showcase and test the code, **NOT for production**. It tests out the following:
+This project is created for demonstration and testing purposes. It is only intended to showcase and test the code, **NOT for production**. It tests out the following with a SPA-like app:
 
 The ones marked in **bold** are the ones that I will support for now.
 
